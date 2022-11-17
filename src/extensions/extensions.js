@@ -4,6 +4,21 @@
 // The function must return "Phil's cake is ready!" if the remaining minutes is 0,
 // "The cake is still baking!" if there are any remaining minutes left,
 // or "You didn't set a timer!" if no value is provided to the parameter
+function timerStatus(remainingminutes) {
+  let cake
+  if (remainingminutes === 0) {
+    cake = "Phil's cake is ready!"
+  } else if (remainingminutes > 0) {
+    cake = 'The cake is still baking!'
+  } else {
+    cake = "You didn't set a timer!"
+  }
+
+  return cake
+}
+const cake1 = timerStatus(30)
+
+console.log(cake1)
 
 // 2. To help Phil prepare ahead of time, create a function named estimatePrepTime
 // that accepts two parameters:
@@ -13,6 +28,19 @@
 // number of ingredients provided and the prep time per ingredient.
 // If no prep time per ingredient is provided, the function should assume each ingredient
 // takes 2 minutes to prepare
+const ingredients = ['sugar', 'milk', 'flour', 'eggs']
+function estimatePrepTime(ingredients, prepTime) {
+  let totalpreptime
+  if (prepTime > 0) {
+    totalpreptime = ingredients.length * prepTime
+  } else {
+    totalpreptime = ingredients.length * 2
+  }
+
+  return totalpreptime
+}
+const totalprep = estimatePrepTime(ingredients, 2)
+console.log(totalprep)
 
 // 3. Phil needs to know the quantity of milk and eggs to use! Create a function
 // named calculateQuantities which accepts two parameters:
@@ -30,6 +58,20 @@
 // calculateQuantities(["milk", "eggs"], 3)
 // returns: { sugar: 0, eggs: 6 }
 
+function calculateQuantities(ingredients, layers) {
+  const obj = { sugar: 0, eggs: 0 }
+
+  if (ingredients.includes('sugar')) {
+    obj.sugar = layers * 100
+  }
+  if (ingredients.includes('eggs')) {
+    obj.eggs = layers * 2
+  }
+  return obj
+}
+const obj = calculateQuantities(ingredients, 2)
+console.log(obj)
+
 // 4. Phil's cake is pretty small and only provides 1 portion. He wants to make a bigger one!
 // Create a function named improveRecipe that accepts two parameters:
 // - an object where the keys are ingredients and the values are quantities
@@ -42,6 +84,24 @@
 // Example:
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
+function improveRecipe(quantities, portions) {
+  const obj = {}
+
+  if ('eggs' in quantities) {
+    obj.eggs = quantities.eggs * portions
+  }
+  if ('milk' in quantities) {
+    obj.milk = quantities.milk * portions
+  }
+  if ('sugar' in quantities) {
+    obj.sugar = quantities.sugar * portions
+  }
+  if ('flour' in quantities) {
+    obj.flour = quantities.flour * portions
+  }
+  return obj
+}
+improveRecipe({ eggs: 4, milk: 100, sugar: 200 }, 3)
 
 // Don't change the code below this line
 module.exports = {
